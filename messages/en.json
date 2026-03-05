@@ -1,0 +1,91 @@
+{
+    "Nav": {
+        "solution": "Solution",
+        "howItWorks": "How it works",
+        "businesses": "Businesses",
+        "benefits": "Benefits",
+        "contact": "Contact"
+    },
+    "Hero": {
+        "title": "Transform passing customers into loyal ones.",
+        "subtitle": "Feedly replaces the paper loyalty card with an interactive digital experience: QR code, rewards, and promotional games.",
+        "primaryCTA": "Request a demo",
+        "secondaryCTA": "See how it works"
+    },
+    "Problem": {
+        "point1": "Paper cards get lost easily.",
+        "point2": "No data on your customers.",
+        "point3": "No interaction outside the store.",
+        "point4": "Hard to stand out from competitors."
+    },
+    "Solution": {
+        "title": "A new generation of customer loyalty",
+        "card1Title": "Digital loyalty card",
+        "card1Text": "QR code scanning and instant point additions at checkout.",
+        "card2Title": "Promotional mini-games",
+        "card2Text": "Spin the wheel, scratch cards to engage your customers.",
+        "card3Title": "Smart dashboard",
+        "card3Text": "Track your stats and customer engagement easily."
+    },
+    "HowItWorks": {
+        "title": "How it works",
+        "step1": "Customer scans QR code to access digital loyalty card.",
+        "step2": "During a real purchase, staff scans to add points.",
+        "step3": "Customer can use promotional coins to play mini-games.",
+        "step4": "Games generate reward coupons.",
+        "step5": "Coupons are used during a real purchase."
+    },
+    "Businesses": {
+        "title": "Built for all physical businesses",
+        "tags": [
+            "Restaurants",
+            "Cafés",
+            "Hair salons",
+            "Garages",
+            "Beauty salons",
+            "Shops",
+            "Local businesses"
+        ]
+    },
+    "Benefits": {
+        "title": "Benefits",
+        "benefit1": "Higher retention",
+        "benefit2": "Turns visits into reward moments",
+        "benefit3": "Modern interactive experience",
+        "benefit4": "Easy tracking & insights"
+    },
+    "FinalCTA": {
+        "title": "Schedule a Call With Our Experts",
+        "text": "Book a meeting slot to discover how Feedly fits your business needs.",
+        "button": "Schedule a call"
+    },
+    "Footer": {
+        "description": "Digital loyalty and engagement platform for physical businesses.",
+        "legal": "Legal",
+        "privacy": "Privacy Policy",
+        "contact": "Contact"
+    },
+    "Modal": {
+        "title": "Request a demo",
+        "name": "Name",
+        "email": "Email",
+        "phone": "Phone",
+        "businessType": "Business type",
+        "location": "City / Country",
+        "submit": "Submit",
+        "success": "Thanks! We'll contact you shortly."
+    },
+    "ScheduleModal": {
+        "title": "Schedule a call",
+        "name": "Full name",
+        "email": "Email address",
+        "phone": "Phone number",
+        "company": "Company name",
+        "timePref": "Preferred time",
+        "timeSlot1": "Between 8am - 12pm",
+        "timeSlot2": "Between 12pm - 4pm",
+        "timeSlot3": "Between 4pm - 8pm",
+        "submit": "Confirm appointment",
+        "success": "Noted! We will call you at the preferred time."
+    }
+}

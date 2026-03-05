@@ -1,0 +1,91 @@
+{
+  "Nav": {
+    "solution": "Solution",
+    "howItWorks": "Comment ça marche",
+    "businesses": "Commerces",
+    "benefits": "Avantages",
+    "contact": "Contact"
+  },
+  "Hero": {
+    "title": "Transformez vos clients de passage en clients fidèles.",
+    "subtitle": "Feedly remplace la carte de fidélité papier par une expérience numérique interactive : QR code, récompenses et jeux promotionnels.",
+    "primaryCTA": "Demander une démo",
+    "secondaryCTA": "Voir comment ça marche"
+  },
+  "Problem": {
+    "point1": "La carte papier se perd facilement.",
+    "point2": "Aucune donnée sur vos clients.",
+    "point3": "Aucune interaction en-dehors du magasin.",
+    "point4": "Difficile de se démarquer des concurrents."
+  },
+  "Solution": {
+    "title": "Une nouvelle génération de fidélité client",
+    "card1Title": "Carte de fidélité digitale",
+    "card1Text": "Scan de QR code et ajout de points instantané en caisse.",
+    "card2Title": "Mini-jeux promotionnels",
+    "card2Text": "Roue de la fortune, tickets à gratter pour engager vos clients.",
+    "card3Title": "Tableau de bord intelligent",
+    "card3Text": "Suivez vos statistiques et l'engagement de votre clientèle."
+  },
+  "HowItWorks": {
+    "title": "Comment ça marche",
+    "step1": "Le client scanne un QR code pour accéder à sa carte de fidélité digitale.",
+    "step2": "Lors d'un achat réel, le commerçant scanne pour ajouter des points.",
+    "step3": "Le client utilise ses pièces promotionnelles pour jouer aux mini-jeux.",
+    "step4": "Les jeux génèrent des coupons de récompense.",
+    "step5": "Les coupons sont utilisés lors d'un achat réel."
+  },
+  "Businesses": {
+    "title": "Pensé pour tous les commerces physiques",
+    "tags": [
+      "Restaurants",
+      "Cafés",
+      "Salons de coiffure",
+      "Garages",
+      "Instituts de beauté",
+      "Boutiques",
+      "Commerces de proximité"
+    ]
+  },
+  "Benefits": {
+    "title": "Avantages",
+    "benefit1": "Rétention plus élevée",
+    "benefit2": "Transforme les visites en moments de récompense",
+    "benefit3": "Expérience interactive moderne",
+    "benefit4": "Suivi et insights faciles"
+  },
+  "FinalCTA": {
+    "title": "Prenez rendez-vous avec un expert",
+    "text": "Réservez un créneau d'échange pour découvrir comment Feedly peut s'adapter à votre commerce.",
+    "button": "Prendre rendez-vous"
+  },
+  "Footer": {
+    "description": "Plateforme numérique de fidélité et d'engagement pour les commerces physiques.",
+    "legal": "Mentions légales",
+    "privacy": "Politique de confidentialité",
+    "contact": "Contact"
+  },
+  "Modal": {
+    "title": "Demander une démo",
+    "name": "Nom",
+    "email": "Email",
+    "phone": "Téléphone",
+    "businessType": "Type de commerce",
+    "location": "Ville / Pays",
+    "submit": "Valider",
+    "success": "Merci ! Nous vous contacterons rapidement."
+  },
+  "ScheduleModal": {
+    "title": "Prendre un rendez-vous",
+    "name": "Nom complet",
+    "email": "Adresse email",
+    "phone": "Numéro de téléphone",
+    "company": "Entreprise",
+    "timePref": "Horaire souhaité",
+    "timeSlot1": "Entre 08h et 12h",
+    "timeSlot2": "Entre 12h et 16h",
+    "timeSlot3": "Entre 16h et 20h",
+    "submit": "Valider le rendez-vous",
+    "success": "C'est noté ! Nous vous rappellerons à l'horaire convenu."
+  }
+}
