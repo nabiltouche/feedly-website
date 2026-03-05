@@ -2,47 +2,81 @@
 
 import { useLocale } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/routing";
-import { ChangeEvent, useTransition } from "react";
+import { useTransition, useState, useRef, useEffect } from "react";
 import clsx from "clsx";
+import { Globe, ChevronDown } from "lucide-react";
+
+const LOCALES = [
+    { code: "fr", label: "FR" },
+    { code: "en", label: "EN" },
+    { code: "ar", label: "AR" },
+];
 
 export default function LanguageSwitcher() {
     const locale = useLocale();
     const router = useRouter();
     const pathname = usePathname();
     const [isPending, startTransition] = useTransition();
+    const [isOpen, setIsOpen] = useState(false);
+    const dropdownRef = useRef<HTMLDivElement>(null);
 
-    function onSelectChange(e: ChangeEvent<HTMLSelectElement>) {
-        const nextLocale = e.target.value;
+    // Fermer si clic à l'extérieur
+    useEffect(() => {
+        function handleClickOutside(event: MouseEvent) {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+                setIsOpen(false);
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
+
+    function selectLocale(nextLocale: string) {
+        setIsOpen(false);
+        if (nextLocale === locale) return;
         startTransition(() => {
             router.replace(pathname, { locale: nextLocale });
         });
     }
 
+    const currentLabel = LOCALES.find(l => l.code === locale)?.label || "FR";
+
     return (
-        <div className="relative flex items-center bg-slate-800/50 hover:bg-slate-800/80 border border-slate-700/50 rounded-full px-3 py-1.5 transition-colors">
-            <svg className="w-4 h-4 text-emerald-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-            </svg>
-            <select
-                defaultValue={locale}
-                onChange={onSelectChange}
+        <div className="relative inline-block text-start" ref={dropdownRef}>
+            <button
+                type="button"
+                onClick={() => setIsOpen(!isOpen)}
                 disabled={isPending}
                 className={clsx(
-                    "bg-transparent cursor-pointer outline-none font-bold text-sm text-slate-200 hover:text-white transition-colors appearance-none pr-4",
-                    "focus-visible:ring-0",
-                    isPending && "opacity-50"
+                    "flex items-center gap-2.5 bg-slate-800/50 hover:bg-slate-800/80 border border-slate-700/50 rounded-full px-4 py-2.5 transition-all text-slate-200 hover:text-white font-bold text-sm select-none",
+                    isPending && "opacity-50 cursor-not-allowed",
+                    isOpen && "bg-slate-800 ring-2 ring-emerald-500/50 border-emerald-500/50"
                 )}
             >
-                <option value="fr" className="text-slate-900 bg-white font-medium">FR</option>
-                <option value="en" className="text-slate-900 bg-white font-medium">EN</option>
-                <option value="ar" className="text-slate-900 bg-white font-medium">AR</option>
-            </select>
-            {/* Custom chevron to replace default browser one */}
-            <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                <svg className="w-3 h-3 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
-                </svg>
-            </div>
+                <Globe className="w-4.5 h-4.5 text-emerald-500" />
+                <span>{currentLabel}</span>
+                <ChevronDown className={clsx("w-4 h-4 text-slate-400 transition-transform duration-300", isOpen && "rotate-180")} />
+            </button>
+
+            {isOpen && (
+                <div className="absolute top-full mt-2 end-0 w-36 rounded-xl bg-slate-800 border border-slate-700 shadow-xl overflow-hidden z-50 animate-in fade-in zoom-in-95 duration-200">
+                    <ul className="py-1.5 flex flex-col">
+                        {LOCALES.map((l) => (
+                            <li key={l.code}>
+                                <button
+                                    onClick={() => selectLocale(l.code)}
+                                    className={clsx(
+                                        "w-full text-start px-5 py-3 text-sm font-semibold transition-colors flex items-center gap-3",
+                                        locale === l.code ? "text-emerald-400 bg-slate-700/40" : "text-slate-300 hover:bg-slate-700 hover:text-white"
+                                    )}
+                                >
+                                    {l.label}
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
         </div>
     );
 }
