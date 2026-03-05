@@ -2,8 +2,9 @@
 
 import Image from "next/image";
 import { Link, usePathname } from "@/i18n/routing";
+import clsx from "clsx";
 
-export default function Logo() {
+export default function Logo({ isFooter = false }: { isFooter?: boolean }) {
     const pathname = usePathname();
     const isHome = pathname === "/";
 
@@ -32,7 +33,10 @@ export default function Logo() {
                     width={256}
                     height={256}
                     priority
-                    className="h-16 md:h-20 lg:h-24 w-auto object-contain"
+                    className={clsx(
+                        "w-auto object-contain",
+                        isFooter ? "h-12" : "h-12 md:h-14 lg:h-16"
+                    )}
                 />
             </div>
         </Link>

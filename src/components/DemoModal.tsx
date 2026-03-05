@@ -2,7 +2,8 @@
 
 import { useTranslations } from "next-intl";
 import { useEffect, useState, useRef } from "react";
-import { X, Loader2 } from "lucide-react";
+import { X } from "lucide-react";
+import DemoForm from "./forms/DemoForm";
 
 export default function DemoModal() {
     const t = useTranslations("Modal");
@@ -32,29 +33,7 @@ export default function DemoModal() {
         };
     }, [isOpen]);
 
-    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-        e.preventDefault();
-        setStatus("loading");
-
-        const formData = new FormData(e.currentTarget);
-        const data = Object.fromEntries(formData.entries());
-
-        try {
-            const res = await fetch("/api/demo-request", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data),
-            });
-
-            if (res.ok) {
-                setStatus("success");
-            } else {
-                setStatus("error");
-            }
-        } catch {
-            setStatus("error");
-        }
-    }
+    // Removed redundant handleSubmit since DemoForm handles it internally
 
     if (!isOpen) return null;
 
@@ -93,47 +72,7 @@ export default function DemoModal() {
                             <p className="text-xl px-4">{t("success")}</p>
                         </div>
                     ) : (
-                        <form onSubmit={handleSubmit} className="space-y-4 w-full animate-in fade-in duration-300">
-                            <div className="grid sm:grid-cols-2 gap-4">
-                                <div className="space-y-1">
-                                    <label htmlFor="name" className="text-sm font-medium text-slate-300">{t("name")}</label>
-                                    <input required id="name" name="name" type="text" className="w-full bg-slate-950 border border-slate-700 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 rounded-lg px-4 py-2 text-white outline-none transition-all" />
-                                </div>
-                                <div className="space-y-1">
-                                    <label htmlFor="email" className="text-sm font-medium text-slate-300">{t("email")}</label>
-                                    <input required id="email" name="email" type="email" className="w-full bg-slate-950 border border-slate-700 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 rounded-lg px-4 py-2 text-white outline-none transition-all" />
-                                </div>
-                            </div>
-
-                            <div className="space-y-1">
-                                <label htmlFor="phone" className="text-sm font-medium text-slate-300">{t("phone")}</label>
-                                <input required id="phone" name="phone" type="tel" className="w-full bg-slate-950 border border-slate-700 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 rounded-lg px-4 py-2 text-white outline-none transition-all" />
-                            </div>
-
-                            <div className="grid sm:grid-cols-2 gap-4">
-                                <div className="space-y-1">
-                                    <label htmlFor="businessType" className="text-sm font-medium text-slate-300">{t("businessType")}</label>
-                                    <input required id="businessType" name="businessType" type="text" className="w-full bg-slate-950 border border-slate-700 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 rounded-lg px-4 py-2 text-white outline-none transition-all" />
-                                </div>
-                                <div className="space-y-1">
-                                    <label htmlFor="location" className="text-sm font-medium text-slate-300">{t("location")}</label>
-                                    <input required id="location" name="location" type="text" className="w-full bg-slate-950 border border-slate-700 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 rounded-lg px-4 py-2 text-white outline-none transition-all" />
-                                </div>
-                            </div>
-
-                            {status === "error" && (
-                                <p className="text-rose-400 text-sm">Une erreur est survenue, veuillez réessayer.</p>
-                            )}
-
-                            <button
-                                type="submit"
-                                disabled={status === "loading"}
-                                className="w-full mt-6 bg-emerald-500 hover:bg-emerald-600 disabled:opacity-50 text-slate-950 font-bold px-4 py-3 rounded-lg transition-colors flex items-center justify-center gap-2"
-                            >
-                                {status === "loading" && <Loader2 className="w-5 h-5 animate-spin" />}
-                                {t("submit")}
-                            </button>
-                        </form>
+                        <DemoForm onSuccess={() => setStatus("success")} />
                     )}
                 </div>
             </div>

@@ -2,7 +2,8 @@
 
 import { useTranslations } from "next-intl";
 import { useEffect, useState, useRef } from "react";
-import { X, Loader2 } from "lucide-react";
+import { X } from "lucide-react";
+import RdvForm from "./forms/RdvForm";
 
 export default function ScheduleModal() {
     const t = useTranslations("ScheduleModal");
@@ -35,29 +36,7 @@ export default function ScheduleModal() {
         };
     }, [isOpen]);
 
-    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-        e.preventDefault();
-        setStatus("loading");
-
-        const formData = new FormData(e.currentTarget);
-        const data = Object.fromEntries(formData.entries());
-
-        try {
-            const res = await fetch("/api/schedule-request", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data),
-            });
-
-            if (res.ok) {
-                setStatus("success");
-            } else {
-                setStatus("error");
-            }
-        } catch {
-            setStatus("error");
-        }
-    }
+    // Removed redundant handleSubmit since RdvForm handles it internally
 
     if (!isOpen) return null;
 
@@ -96,58 +75,7 @@ export default function ScheduleModal() {
                             <p className="text-xl px-4">{t("success")}</p>
                         </div>
                     ) : (
-                        <form onSubmit={handleSubmit} className="space-y-4 w-full animate-in fade-in duration-300">
-                            <div className="grid sm:grid-cols-2 gap-4">
-                                <div className="space-y-1">
-                                    <label htmlFor="schedule-name" className="text-sm font-medium text-slate-300">{t("name")}</label>
-                                    <input required id="schedule-name" name="name" type="text" className="w-full bg-slate-950 border border-slate-700 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 rounded-lg px-4 py-2 text-white outline-none transition-all placeholder:text-slate-600" />
-                                </div>
-                                <div className="space-y-1">
-                                    <label htmlFor="schedule-email" className="text-sm font-medium text-slate-300">{t("email")}</label>
-                                    <input required id="schedule-email" name="email" type="email" className="w-full bg-slate-950 border border-slate-700 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 rounded-lg px-4 py-2 text-white outline-none transition-all placeholder:text-slate-600" />
-                                </div>
-                            </div>
-
-                            <div className="space-y-1">
-                                <label htmlFor="schedule-phone" className="text-sm font-medium text-slate-300">{t("phone")}</label>
-                                <input required id="schedule-phone" name="phone" type="tel" className="w-full bg-slate-950 border border-slate-700 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 rounded-lg px-4 py-2 text-white outline-none transition-all placeholder:text-slate-600" />
-                            </div>
-
-                            <div className="grid sm:grid-cols-2 gap-4">
-                                <div className="space-y-1">
-                                    <label htmlFor="schedule-company" className="text-sm font-medium text-slate-300">{t("company")}</label>
-                                    <input required id="schedule-company" name="company" type="text" className="w-full bg-slate-950 border border-slate-700 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 rounded-lg px-4 py-2 text-white outline-none transition-all placeholder:text-slate-600" />
-                                </div>
-                                <div className="space-y-1">
-                                    <label htmlFor="schedule-timePref" className="text-sm font-medium text-slate-300">{t("timePref")}</label>
-                                    <select
-                                        required
-                                        id="schedule-timePref"
-                                        name="timePref"
-                                        defaultValue=""
-                                        className="w-full bg-slate-950 border border-slate-700 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 rounded-lg px-4 py-2.5 text-white outline-none transition-all appearance-none cursor-pointer"
-                                    >
-                                        <option value="" disabled className="text-slate-500">{t("timePref")}...</option>
-                                        <option value="8h-12h" className="text-slate-900 bg-white">{t("timeSlot1")}</option>
-                                        <option value="12h-16h" className="text-slate-900 bg-white">{t("timeSlot2")}</option>
-                                        <option value="16h-20h" className="text-slate-900 bg-white">{t("timeSlot3")}</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            {status === "error" && (
-                                <p className="text-rose-400 text-sm animate-in shake">Une erreur est survenue, veuillez réessayer.</p>
-                            )}
-
-                            <button
-                                type="submit"
-                                disabled={status === "loading"}
-                                className="w-full mt-6 bg-emerald-500 hover:bg-emerald-400 disabled:opacity-50 text-slate-950 font-bold px-4 py-3 rounded-lg transition-colors flex items-center justify-center gap-2 group shadow-lg shadow-emerald-500/10"
-                            >
-                                {status === "loading" && <Loader2 className="w-5 h-5 animate-spin" />}
-                                {t("submit")}
-                            </button>
-                        </form>
+                        <RdvForm onSuccess={() => setStatus("success")} />
                     )}
                 </div>
             </div>

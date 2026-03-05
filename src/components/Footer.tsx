@@ -11,6 +11,9 @@ export default function Footer() {
                 <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-8">
 
                     <div className="text-center md:text-left">
+                        <div className="inline-block mb-4">
+                            <Logo isFooter />
+                        </div>
                         <p className="max-w-xs text-sm">
                             {t("description")}
                         </p>
